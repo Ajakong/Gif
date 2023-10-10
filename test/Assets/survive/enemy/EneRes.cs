@@ -14,7 +14,7 @@ public class EneRes : MonoBehaviour
 
 
     float RandX = 0;
-    float RandY = 0;
+    float RandZ = 0;
     float timeGrow = 1.01f;
     // Start is called before the first frame update
     void Start()
@@ -35,12 +35,12 @@ public class EneRes : MonoBehaviour
         {
             reS = 1;
             enemy = Instantiate(EnemyPre);
-            enemy.transform.position = new Vector3(RandX, 10, RandY);
+            enemy.transform.position = new Vector3(transform.position.x+RandX, 10, transform.position.z+RandZ);
             
         }
 
 
         RandX = Random.Range(-30, 30);
-        RandY = Random.Range(-30, 30);
+        RandZ = Random.Range(-30, 30);
     }
 }

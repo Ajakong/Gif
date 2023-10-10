@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class EnemyState : MonoBehaviour
 {
-    public int Hp = 20;
+    public int maxHp = 100;
+    public int Hp = 100;
 
     public GameObject Item;
     GameObject Drop;

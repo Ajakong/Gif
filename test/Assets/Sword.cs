@@ -39,6 +39,8 @@ public class Sword : MonoBehaviour
 
     public string Ename;
 
+    int swordAt;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -56,6 +58,8 @@ public class Sword : MonoBehaviour
 
         //剣の移動速度
         speed = 0.0025f;
+
+        swordAt = 30;
 
         //プレイヤーのtransformを取得
         playerTransform = player.transform;
@@ -110,7 +114,7 @@ public class Sword : MonoBehaviour
         if (collision.gameObject.tag == "Enemy")
         {
             EHp = collision.GetComponent<EnemyState>();
-            EHp.HpMove -= 20;
+            EHp.HpMove -= swordAt;
             Debug.Log("aiaiaiaiai");
         }
 
