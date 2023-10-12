@@ -5,8 +5,8 @@ using UnityEngine.UI;
 
 public class Boss1State : MonoBehaviour
 {
-    public float maxHp = 1;
-    public float Hp = 1;
+    public int maxHp = 1;
+    public int Hp = 1;
 
     public GameObject Item;
     GameObject Drop;
@@ -37,7 +37,7 @@ public class Boss1State : MonoBehaviour
 
 
 
-    public float HpMove
+    public int HpMove
     {
         get { return Hp; }
         set { Hp = value; }
@@ -49,8 +49,11 @@ public class Boss1State : MonoBehaviour
         {
             //Debug.Log("hit");
 
-            slider.value -= 1f;
-            Hp -= 1f;
+            slider.value -= 0.2f;
+            if(slider.value <= 0.005)
+            {
+                Hp = 0;
+            }
         }
     }
 }

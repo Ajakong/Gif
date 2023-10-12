@@ -8,6 +8,7 @@ TagManager:
   - Sword
   - ground
   - Enemy
+  - item
   layers:
   - Default
   - TransparentFX

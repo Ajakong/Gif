@@ -21,4 +21,17 @@ public class ItemCon : MonoBehaviour
     {
         
     }
+
+    private void OnCollisionEnter(Collision other)
+    {
+        if(other.gameObject.tag == "Player")
+        {
+            GameObject sword = GameObject.Find("ObjSwrod");
+            Transform transform = sword.transform;
+            Destroy(sword.gameObject);
+
+
+            Destroy(this.gameObject);
+        }
+    }
 }

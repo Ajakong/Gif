@@ -8,8 +8,13 @@ public class BossUI : MonoBehaviour
     Slider slider;
     CanvasGroup canvasGroup;
 
+    bool appFlag = true;
+
     bool deleteFlag = false;
     public int count = 0;
+
+    //GameObject obj = GameObject.Find("Boss");
+    //Boss1State state;
 
     // Start is called before the first frame update
     void Start()
@@ -40,10 +45,15 @@ public class BossUI : MonoBehaviour
             }
         }
 
-        else if (canvasGroup.alpha <= 1)
+        if (canvasGroup.alpha <= 1 && appFlag)
         {
             slider.value += 0.01f;
             canvasGroup.alpha += 0.01f;
+
+            if(slider.value == 1)
+            {
+                appFlag = false;
+            }
         }
 
 

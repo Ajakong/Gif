@@ -310,15 +310,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: df248139392b5a0438de493b3dee1bbd, type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.08844967
+      value: 0.088
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: df248139392b5a0438de493b3dee1bbd, type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.08844967
+      value: 0.088
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: df248139392b5a0438de493b3dee1bbd, type: 3}
       propertyPath: m_LocalScale.z
-      value: 0.08844967
+      value: 0.088
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: df248139392b5a0438de493b3dee1bbd, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1048,7 +1048,7 @@ GameObject:
   - component: {fileID: 1473320322}
   m_Layer: 5
   m_Name: Item
-  m_TagString: Untagged
+  m_TagString: item
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
