@@ -6,6 +6,9 @@ using static Unity.VisualScripting.Member;
 
 public class unitychanMove : MonoBehaviour
 {
+
+    public Transform camera;
+
     Rigidbody myRb;
     //ˆÚ“®‘¬“x
     float moveSpeed;
@@ -23,6 +26,7 @@ public class unitychanMove : MonoBehaviour
 
     bool moveLeftFlag = false;
 
+    Vector3 CPos;
     Vector3 move1;
     Vector3 move2;
         
@@ -52,6 +56,7 @@ public class unitychanMove : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        CPos = camera.transform.position;
         move1 = transform.forward * moveSpeed;
         move2 = transform.right * moveSpeed;
 
@@ -157,6 +162,8 @@ public class unitychanMove : MonoBehaviour
         {
             flag = true;
             myRb.AddForce(force, ForceMode.Impulse);
+            CPos.y -= 2;
+            camera.transform.position = CPos;
         }
 
         if(runFlag)
