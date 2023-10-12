@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class Boss1State : MonoBehaviour
 {
-    public int maxHp = 2000;
-    public int Hp = 2000;
+    public int maxHp = 2;
+    public int Hp = 2;
 
     public GameObject Item;
     GameObject Drop;
@@ -25,7 +25,7 @@ public class Boss1State : MonoBehaviour
             Destroy(this.gameObject);
             Drop = Instantiate(Item);
             Drop.transform.position = transform.position;
-            Destroy(gameObject);
+            Destroy(this.gameObject);
         }
 
     }
