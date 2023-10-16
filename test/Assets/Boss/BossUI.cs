@@ -28,7 +28,7 @@ public class BossUI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(slider.value == 0)
+        if(slider.value <= 0.005)
         {
             deleteFlag = true;
         }

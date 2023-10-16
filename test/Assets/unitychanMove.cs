@@ -13,8 +13,6 @@ public class unitychanMove : MonoBehaviour
     //移動速度
     float moveSpeed;
 
- 
-
     //視点の移動速度
     
     //前に進んでいるか

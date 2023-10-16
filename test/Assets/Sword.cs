@@ -41,6 +41,12 @@ public class Sword : MonoBehaviour
 
     int swordAt;
 
+    //当たり判定
+    BoxCollider col;
+    public float count = 0.0f;
+    bool colFlag = false;
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -48,7 +54,7 @@ public class Sword : MonoBehaviour
         //player = GameObject.Find("Player");
         player = GameObject.Find("unitychan");
         //装備する前の剣の座標を指定
-        swordPos = new Vector3(0.0f,1.0f,3.0f);
+        swordPos = new Vector3(0.0f, 1.0f, 3.0f);
 
         //装備した後の剣の座標を指定
         //eqipPos = new Vector3(0.3f, 1.0f, 0.0f);
@@ -63,6 +69,8 @@ public class Sword : MonoBehaviour
 
         //プレイヤーのtransformを取得
         playerTransform = player.transform;
+
+        col = this.gameObject.GetComponent<BoxCollider>();
     }
 
     // Update is called once per frame
@@ -107,6 +115,35 @@ public class Sword : MonoBehaviour
                 time = 0;
             }
         }
+
+        //当たり判定（未完成
+        if (colFlag)
+        {
+            count++;
+            if (count >= 1f && count <= 1.5f)
+            {
+                col.enabled = true;
+            }
+            else if (count > 1.5f || count <= 30f)
+            {
+                col.enabled = false;
+                colFlag = false;
+            }
+
+        }
+        else
+        {
+            count = 0f;
+
+        }
+    }
+
+    private void Update()
+    {
+        if (Input.GetMouseButtonDown(0))
+        {
+            colFlag = true;
+        }
     }
 
     void OnTriggerEnter(Collider collision) // 当たり判定を察知
@@ -119,29 +156,32 @@ public class Sword : MonoBehaviour
         }
 
         if (collision.gameObject.tag == "Player")
-            {
-                
+        {
 
-                //プレイヤーに当たった(剣の動きを消す)
-                isHitFlag = true;
-                //剣をプレイヤーの子オブジェクトにする
-                this.gameObject.transform.parent = RootObject.gameObject.transform;
 
-                //ワールド座標を基準に、回転を取得
-                Vector3 localAngle = playerTransform.localEulerAngles;
-                //Rotationを0に(もともと90に設定して配置している)
-                localAngle.y = 0.0f;
-                //Rotationを設定
-                transform.localEulerAngles = localAngle;
+            //プレイヤーに当たった(剣の動きを消す)
+            isHitFlag = true;
+            //剣をプレイヤーの子オブジェクトにする
+            this.gameObject.transform.parent = RootObject.gameObject.transform;
 
-                playerLocalPos.x = 0.0f;
-                playerLocalPos.y = 0.0f;
-                playerLocalPos.z = 0.0f;
-                //剣を装備した時の剣の位置に移動させるための座標を足す
-                playerLocalPos += eqipPos;
-                //剣の装備後の座標を設定
-                transform.localPosition = playerLocalPos;
-            
+            //ワールド座標を基準に、回転を取得
+            Vector3 localAngle = playerTransform.localEulerAngles;
+            //Rotationを0に(もともと90に設定して配置している)
+            localAngle.y = 0.0f;
+            //Rotationを設定
+            transform.localEulerAngles = localAngle;
+
+            playerLocalPos.x = 0.0f;
+            playerLocalPos.y = 0.0f;
+            playerLocalPos.z = 0.0f;
+            //剣を装備した時の剣の位置に移動させるための座標を足す
+            playerLocalPos += eqipPos;
+            //剣の装備後の座標を設定
+            transform.localPosition = playerLocalPos;
+
+            //当たり判定削除
+            col.enabled = false;
+
         }
     }
 }
