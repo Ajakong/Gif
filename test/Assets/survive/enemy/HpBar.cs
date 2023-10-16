@@ -11,7 +11,7 @@ public class HpBar : MonoBehaviour
 
     EnemyState ene;
 
-    int EneHp=100;
+    //int EneHp=100;
     // Start is called before the first frame update
     void Start()
     {

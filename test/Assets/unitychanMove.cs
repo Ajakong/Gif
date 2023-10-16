@@ -7,7 +7,7 @@ using static Unity.VisualScripting.Member;
 public class unitychanMove : MonoBehaviour
 {
 
-    public Transform camera;
+    public Transform cameraPos;
 
     Rigidbody myRb;
     //移動速度
@@ -16,7 +16,7 @@ public class unitychanMove : MonoBehaviour
  
 
     //視点の移動速度
-    float rotate = 0;
+    
     //前に進んでいるか
     bool moveFrontFlag = false;
     //後ろに進んでいるかどうか
@@ -56,7 +56,7 @@ public class unitychanMove : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        CPos = camera.transform.position;
+        CPos = cameraPos.position;
         move1 = transform.forward * moveSpeed;
         move2 = transform.right * moveSpeed;
 
@@ -163,7 +163,7 @@ public class unitychanMove : MonoBehaviour
             flag = true;
             myRb.AddForce(force, ForceMode.Impulse);
             CPos.y -= 2;
-            camera.transform.position = CPos;
+            cameraPos.transform.position = CPos;
         }
 
         if(runFlag)

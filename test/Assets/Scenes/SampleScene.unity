@@ -1087,7 +1087,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4941ce38d8396194daf2948d110b77bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  camera: {fileID: 273030572}
+  cameraPos: {fileID: 273030572}
   flag: 0
 --- !u!136 &1886504338
 CapsuleCollider:
@@ -1131,6 +1131,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   EnemyPre: {fileID: 2048271047269858779, guid: 11b545807a313644c9ad83eca54451d5, type: 3}
+--- !u!114 &1886504341
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1886504330}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dbc4602663e016743bb3a22cef31a792, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &2053078513
 PrefabInstance:
   m_ObjectHideFlags: 0

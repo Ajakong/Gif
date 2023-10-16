@@ -7,9 +7,12 @@ public class EnemyState : MonoBehaviour
     public int maxHp = 100;
     public int Hp = 100;
 
+    int attack = 5;
+
     public GameObject Item;
     GameObject Drop;
     
+    UniState state;
     // Start is called before the first frame update
     void Start()
     {
@@ -33,5 +36,14 @@ public class EnemyState : MonoBehaviour
     {
         get { return Hp; }
         set { Hp = value; }
+    }
+
+    public void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.tag == "Player")
+        {
+            state = GetComponent<UniState>();
+            state.UniHpMove -= attack;
+        }
     }
 }
