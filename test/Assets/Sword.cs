@@ -46,7 +46,6 @@ public class Sword : MonoBehaviour
     public float count = 0.0f;
     bool colFlag = false;
 
-
     // Start is called before the first frame update
     void Start()
     {
@@ -71,6 +70,8 @@ public class Sword : MonoBehaviour
         playerTransform = player.transform;
 
         col = this.gameObject.GetComponent<BoxCollider>();
+
+
     }
 
     // Update is called once per frame
@@ -132,11 +133,13 @@ public class Sword : MonoBehaviour
 
         }
 
-        if(count > 55)
+        if(count > 50)
         {
             colFlag = false;
             count = 0;
         }
+
+
     }
 
     private void Update()
@@ -145,6 +148,7 @@ public class Sword : MonoBehaviour
         {
             colFlag = true;
         }
+
     }
 
     void OnTriggerEnter(Collider collision) // “–‚½‚è”»’è‚ðŽ@’m

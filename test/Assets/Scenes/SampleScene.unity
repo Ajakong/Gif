@@ -972,7 +972,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   RootObject: {fileID: 204567219}
+<<<<<<< Updated upstream
   Ename: Enemy
+=======
+  Ename: Enemy(clone)
+>>>>>>> Stashed changes
   count: 0
 --- !u!65 &1477056778
 BoxCollider:
@@ -1414,6 +1418,7 @@ MonoBehaviour:
   RootObject: {fileID: 1034136545}
   Ename: 
   count: 0
+<<<<<<< Updated upstream
 --- !u!1 &1850632037
 GameObject:
   m_ObjectHideFlags: 0
@@ -1490,6 +1495,8 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1850632037}
   m_CullTransparentMesh: 1
+=======
+>>>>>>> Stashed changes
 --- !u!1 &1886504330 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 100326, guid: 8f0565f23a2b58541a475bd3c1393052, type: 3}
