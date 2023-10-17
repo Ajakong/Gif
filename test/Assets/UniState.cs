@@ -5,7 +5,9 @@ using UnityEngine.SceneManagement;
 
 public class UniState : MonoBehaviour
 {
-    int UniHp=60;
+    int HealNum=3;
+
+    int UniHp=100;
     // Start is called before the first frame update
     void Start()
     {
@@ -20,6 +22,23 @@ public class UniState : MonoBehaviour
             UniHp=0;
             //ですエフェクト
             SceneManager.LoadScene("GameOver");
+        }
+
+        if(Input.GetKeyUp(KeyCode.H))
+        {
+            if(HealNum>=1)
+            {
+                if (UniHp < 100)
+                {
+                    UniHp += 60;
+                    HealNum--;
+                }
+                else
+                {
+                    Debug.Log("HPがマンタンDEATH！");
+                }
+
+            }
         }
     }
 

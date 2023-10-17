@@ -7,7 +7,7 @@ public class EnemyState : MonoBehaviour
     public int maxHp = 100;
     public int Hp = 100;
 
-    int attack = 5;
+    public int attack = 5;
 
     public GameObject Item;
     GameObject Drop;
@@ -42,7 +42,8 @@ public class EnemyState : MonoBehaviour
     {
         if (collision.gameObject.tag == "Player")
         {
-            state = GetComponent<UniState>();
+            
+            state = collision.gameObject.GetComponent<UniState>();
             state.UniHpMove -= attack;
         }
     }
