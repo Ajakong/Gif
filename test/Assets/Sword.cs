@@ -127,14 +127,15 @@ public class Sword : MonoBehaviour
             else if (count > 1.5f || count <= 30f)
             {
                 col.enabled = false;
-                colFlag = false;
+            
             }
 
         }
-        else
-        {
-            count = 0f;
 
+        if(count > 55)
+        {
+            colFlag = false;
+            count = 0;
         }
     }
 
