@@ -19,12 +19,11 @@ public class unitychanMove : MonoBehaviour
     bool moveFrontFlag = false;
     //後ろに進んでいるかどうか
     bool moveBackFlag = false;
-    //右
+
     bool moveRightFlag = false;
-    //左
+
     bool moveLeftFlag = false;
 
-    //カメラPos
     Vector3 CPos;
     Vector3 move1;
     Vector3 move2;
@@ -39,14 +38,6 @@ public class unitychanMove : MonoBehaviour
 
     bool runFlag = false;
 
-    GameObject sword;
-    Transform swordTransform;
-
-    public bool equipmentFlag = false;
-
-    GameObject handObj;
-    GameObject equipObj;
-
     // Start is called before the first frame update
     void Start()
     {
@@ -58,12 +49,6 @@ public class unitychanMove : MonoBehaviour
         forceDirection = new Vector3(0f, 1.0f, 0f);
         forcePower = 6f;
         force = forcePower * forceDirection;
-
-        sword = GameObject.Find("ObjSword");
-
-        handObj = GameObject.Find("Character1_RightHandMiddle1");
-        equipObj = GameObject.Find("J_Mune_root_00");
-
     }
 
     // Update is called once per frame
@@ -120,14 +105,13 @@ public class unitychanMove : MonoBehaviour
             moveLeftFlag = false;
         }
 
-        //マウスカーソルを消す
         if(Input.GetMouseButton(2))
         {
             Cursor.visible = false;
             Cursor.lockState = CursorLockMode.Locked;
         }
 
-        //ジャンプ
+  
         if (Input.GetKey(KeyCode.Space) && !flag)
         {
             jumpFlag = true;
@@ -138,7 +122,6 @@ public class unitychanMove : MonoBehaviour
             jumpFlag = false;
         }
 
-        //走る
         if (Input.GetKey(KeyCode.LeftShift))
         {
             runFlag = true;
@@ -147,14 +130,8 @@ public class unitychanMove : MonoBehaviour
         {
             runFlag = false;
             moveSpeed = 0.15f;
-        }
 
-        //剣をしまう
-        if (Input.GetKeyDown(KeyCode.Tab) && !equipmentFlag)
-        {
-            //equipmentFlag = true;
         }
-
     }
 
     void FixedUpdate()
@@ -191,14 +168,6 @@ public class unitychanMove : MonoBehaviour
         {
             moveSpeed = 0.4f;
         }
-
-        //しまう
-        if (equipmentFlag)
-        {
-            sword.gameObject.transform.parent = equipObj.gameObject.transform;
-
-        }
-
     }
 
     private void OnCollisionEnter(Collision other)
