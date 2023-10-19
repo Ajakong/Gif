@@ -14,20 +14,21 @@ public class unitychanMove : MonoBehaviour
     float moveSpeed;
 
     //視点の移動速度
-    
+
     //前に進んでいるか
     bool moveFrontFlag = false;
     //後ろに進んでいるかどうか
     bool moveBackFlag = false;
-
+    //右
     bool moveRightFlag = false;
-
+    //左
     bool moveLeftFlag = false;
 
+    //カメラPos
     Vector3 CPos;
     Vector3 move1;
     Vector3 move2;
-        
+
     Vector3 angle;
 
     Vector3 forceDirection;
@@ -37,6 +38,14 @@ public class unitychanMove : MonoBehaviour
     public bool flag = false;
 
     bool runFlag = false;
+
+    GameObject sword;
+    Transform swordTransform;
+
+    public bool equipmentFlag = false;
+
+    GameObject handObj;
+    GameObject equipObj;
 
     // Start is called before the first frame update
     void Start()
@@ -49,6 +58,12 @@ public class unitychanMove : MonoBehaviour
         forceDirection = new Vector3(0f, 1.0f, 0f);
         forcePower = 6f;
         force = forcePower * forceDirection;
+
+        sword = GameObject.Find("ObjSword");
+
+        handObj = GameObject.Find("Character1_RightHandMiddle1");
+        equipObj = GameObject.Find("J_Mune_root_00");
+
     }
 
     // Update is called once per frame
@@ -105,13 +120,14 @@ public class unitychanMove : MonoBehaviour
             moveLeftFlag = false;
         }
 
-        if(Input.GetMouseButton(2))
+        //マウスカーソルを消す
+        if (Input.GetMouseButton(2))
         {
             Cursor.visible = false;
             Cursor.lockState = CursorLockMode.Locked;
         }
 
-  
+        //ジャンプ
         if (Input.GetKey(KeyCode.Space) && !flag)
         {
             jumpFlag = true;
@@ -122,6 +138,7 @@ public class unitychanMove : MonoBehaviour
             jumpFlag = false;
         }
 
+        //走る
         if (Input.GetKey(KeyCode.LeftShift))
         {
             runFlag = true;
@@ -130,8 +147,14 @@ public class unitychanMove : MonoBehaviour
         {
             runFlag = false;
             moveSpeed = 0.15f;
-
         }
+
+        //剣をしまう
+        if (Input.GetKeyDown(KeyCode.Tab) && !equipmentFlag)
+        {
+            //equipmentFlag = true;
+        }
+
     }
 
     void FixedUpdate()
@@ -146,7 +169,7 @@ public class unitychanMove : MonoBehaviour
             myRb.position -= move1;
         }
 
-        if(moveRightFlag)
+        if (moveRightFlag)
         {
             myRb.position += move2;
         }
@@ -164,15 +187,23 @@ public class unitychanMove : MonoBehaviour
             cameraPos.transform.position = CPos;
         }
 
-        if(runFlag)
+        if (runFlag)
         {
             moveSpeed = 0.4f;
         }
+
+        //しまう
+        if (equipmentFlag)
+        {
+            sword.gameObject.transform.parent = equipObj.gameObject.transform;
+
+        }
+
     }
 
     private void OnCollisionEnter(Collision other)
     {
-        if(other.gameObject.tag == "ground")
+        if (other.gameObject.tag == "ground")
         {
             flag = false;
         }
