@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class UniState : MonoBehaviour
 {
-    int HealNum=3;
+    public int HealItem=3;
 
     int UniHp=100;
     // Start is called before the first frame update
@@ -26,12 +26,12 @@ public class UniState : MonoBehaviour
 
         if(Input.GetKeyUp(KeyCode.H))
         {
-            if(HealNum>=1)
+            if(HealItem>=1)
             {
                 if (UniHp < 100)
                 {
                     UniHp += 60;
-                    HealNum--;
+                    HealItem--;
                 }
                 else
                 {
@@ -46,5 +46,10 @@ public class UniState : MonoBehaviour
     {
         get { return UniHp; }
         set { UniHp = value; }
+    }
+
+    public int HealNum
+    {
+        get { return HealItem; }
     }
 }

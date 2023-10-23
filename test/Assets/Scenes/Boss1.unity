@@ -1495,6 +1495,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cameraPos: {fileID: 1866676354}
   flag: 0
+  equipmentFlag: 0
 --- !u!95 &1740410971
 Animator:
   serializedVersion: 4
