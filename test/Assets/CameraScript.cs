@@ -1,22 +1,20 @@
 using UnityEngine;
- 
+
 public class CameraScript : MonoBehaviour
 {
     [SerializeField] GameObject player;
 
-    private Vector3 velocity = Vector3.zero;  
+    private Vector3 velocity = Vector3.zero;
     Vector3 gole;
     public float smoothTime = 0.3f;
     float mx = 0;
     float my = 0;
     private void Start()
     {
-        
+
     }
     void Update()
     {
-        //gole = new Vector3(player.transform.position.x, player.transform.position.y + 4, player.transform.position.z - 4);
-        
         // マウスの移動量を取得
         mx = Input.GetAxis("Mouse X");
         my = Input.GetAxis("Mouse Y");
@@ -25,7 +23,7 @@ public class CameraScript : MonoBehaviour
         if (Mathf.Abs(mx) > 0.001f)
         {
             // 回転軸はワールド座標のY軸
-            transform.RotateAround(transform.position, Vector3.up, mx * 5f);
+            transform.RotateAround(player.transform.position, Vector3.up, mx * 5f);
         }
 
         // Y方向に一定量移動していれば縦回転

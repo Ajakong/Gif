@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using static Unity.VisualScripting.Member;
 
 public class unitychanMove : MonoBehaviour
@@ -29,8 +30,7 @@ public class unitychanMove : MonoBehaviour
     Vector3 move1;
     Vector3 move2;
 
-    Vector3 angle;
-
+    //ジャンプ関係
     Vector3 forceDirection;
     float forcePower;
     Vector3 force;
@@ -39,6 +39,7 @@ public class unitychanMove : MonoBehaviour
 
     bool runFlag = false;
 
+    //剣関係
     GameObject sword;
     Transform swordTransform;
 
@@ -47,12 +48,20 @@ public class unitychanMove : MonoBehaviour
     GameObject handObj;
     GameObject equipObj;
 
+    //カメラの親オブジェクト
+    GameObject cameraMoveBase;
+    //カメラの親オブジェクトのtransform
+    Transform cameraMoveBaseTra;
+
+    //InputSystem
+    float speed = 30.0f;
+    //入力されたスティックの角度と向きを入れるよう(？)
+    public Vector2 v;
+
     // Start is called before the first frame update
     void Start()
     {
         moveSpeed = 0.15f;
-
-        angle = new Vector3(0, 1.0f, 0);
         myRb = this.GetComponent<Rigidbody>();
 
         forceDirection = new Vector3(0f, 1.0f, 0f);
@@ -64,6 +73,7 @@ public class unitychanMove : MonoBehaviour
         handObj = GameObject.Find("Character1_RightHandMiddle1");
         equipObj = GameObject.Find("J_Mune_root_00");
 
+        cameraMoveBase = GameObject.Find("cameraMather");
     }
 
     // Update is called once per frame
@@ -207,5 +217,87 @@ public class unitychanMove : MonoBehaviour
         {
             flag = false;
         }
+    }
+
+    //左スティックを倒したとき倒した向きと角度で移動
+    public void OnMove(InputAction.CallbackContext context)
+    {
+        // スティックの入力を受け取る
+        v = context.ReadValue<Vector2>();
+
+        // 移動量を計算
+        var mov = new Vector3(v.x * speed * Time.deltaTime, 0, v.y * speed * Time.deltaTime);
+
+        //switch (context.phase)
+        //{
+        //    case InputActionPhase.Started:
+        //        // 入力開始
+
+        //        // 移動方向を向く
+        //        transform.forward = mov;
+        //        break;
+        //    case InputActionPhase.Canceled:
+        //        // 入力終了
+        //        break;
+        //    default:
+        //        // 移動方向を向く
+        //        transform.forward = mov;
+        //        break;
+        //}
+
+        //Performedフェーズ(倒し続けているとき)の処理
+        if (context.phase == InputActionPhase.Performed)
+        {
+            // 移動方向を向く
+            transform.forward = mov;
+
+            // 移動させる
+            transform.position = transform.position + mov;
+        }
+
+
+    }
+
+    //右スティックを倒したときのカメラの移動(今はx方向のみ)
+    public void OnCameraMove(InputAction.CallbackContext context)
+    {
+        // スティックの入力を受け取る
+        var v = context.ReadValue<Vector2>();
+
+        // 移動量を計算
+        var mov = new Vector3(v.x * speed * Time.deltaTime, 0, v.y * speed * Time.deltaTime);
+        //switch (context.phase)
+        //{
+        //    case InputActionPhase.Started:
+        //        // 入力開始
+
+        //        // 移動方向を向く
+        //        transform.forward = mov;
+        //        break;
+        //    case InputActionPhase.Canceled:
+        //        // 入力終了
+        //        break;
+        //    default:
+        //        // 移動方向を向く
+        //        transform.forward = mov;
+        //        break;
+        //}
+
+        // X方向に一定量移動していれば横回転
+        if (Mathf.Abs(v.x) > 0.001f)
+        {
+            // 回転軸はワールド座標のY軸
+            cameraMoveBase.transform.RotateAround(cameraMoveBase.transform.position, Vector3.up, v.x * 5f);
+        }
+
+        // Y方向に一定量移動していれば横回転
+        if (Mathf.Abs(v.y) > 0.001f)
+        {
+            // 回転軸はワールド座標のY軸
+            cameraMoveBase.transform.RotateAround(cameraMoveBase.transform.position, -Vector3.right, v.y * 1f);
+        }
+
+        // 移動させる
+        cameraMoveBaseTra.localEulerAngles = cameraMoveBaseTra.localEulerAngles + mov;
     }
 }
