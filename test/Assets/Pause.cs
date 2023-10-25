@@ -15,6 +15,7 @@ public class Pause : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //à–¾‚Í•s—vƒiƒŠ
         if(Input.GetKeyDown(KeyCode.P))
         {
             pause = true;
