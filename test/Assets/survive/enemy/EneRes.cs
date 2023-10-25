@@ -8,14 +8,19 @@ public class EneRes : MonoBehaviour
 {
     GameObject enemy;
     public GameObject EnemyPre;
+    //リスポーンのインターバル
     private float interval;
+
+    //1000fのときeneが一人スポーンするナリ
     private float reS = 1000f;
 
 
 
     float RandX = 0;
     float RandZ = 0;
-    float timeGrow = 1.01f;
+
+    //時間経過ごとにeneの出現速度を早くするために必要な関数ナリ、これをreSにかける
+    float timeGrow = 1.05f;
     // Start is called before the first frame update
     void Start()
     {
@@ -27,10 +32,10 @@ public class EneRes : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        reS *= timeGrow;
+        
 
 
-
+        //ここがリスポーン処理
         if (reS >= interval)
         {
             reS = 1;
@@ -39,8 +44,13 @@ public class EneRes : MonoBehaviour
             
         }
 
-
+        //そうだ、大声を出しながらplayerの近くにスポーンさせるナリ
         RandX = Random.Range(-30, 30);
         RandZ = Random.Range(-30, 30);
+    }
+
+    private void FixedUpdate()
+    {
+        reS *= timeGrow;
     }
 }

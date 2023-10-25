@@ -37,7 +37,7 @@ public class Sword : MonoBehaviour
     //親オブジェクトにするオブジェクト名
     public GameObject RootObject;
 
-    public string Ename;
+    
 
     int swordAt;
 

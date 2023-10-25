@@ -22,10 +22,12 @@ public class EnemyState : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.position = transform.position;
+        //transform.position = transform.position;
+        //Ž€‚ñ‚¾
         if (Hp <= 0)
         {
             Destroy(this.gameObject);
+            //itemDrop‚·‚éƒiƒŠ
             Drop = Instantiate(Item);
             Drop.transform.position = transform.position;
             Destroy(gameObject);
