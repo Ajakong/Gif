@@ -15,7 +15,7 @@ public class EneRes : MonoBehaviour
 
     float RandX = 0;
     float RandZ = 0;
-    float timeGrow = 1.01f;
+    float timeGrow = 1.05f;
     // Start is called before the first frame update
     void Start()
     {
@@ -27,7 +27,7 @@ public class EneRes : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        reS *= timeGrow;
+        
 
 
 
@@ -42,5 +42,10 @@ public class EneRes : MonoBehaviour
 
         RandX = Random.Range(-30, 30);
         RandZ = Random.Range(-30, 30);
+    }
+
+    private void FixedUpdate()
+    {
+        reS *= timeGrow;
     }
 }
