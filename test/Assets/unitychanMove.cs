@@ -49,7 +49,7 @@ public class unitychanMove : MonoBehaviour
     GameObject equipObj;
 
     //カメラの親オブジェクト
-    GameObject cameraMoveBase;
+    public GameObject cameraMoveBase;
     //カメラの親オブジェクトのtransform
     Transform cameraMoveBaseTra;
 
@@ -57,6 +57,9 @@ public class unitychanMove : MonoBehaviour
     float speed = 30.0f;
     //入力されたスティックの角度と向きを入れるよう(？)
     public Vector2 v;
+
+    Vector2 moveInfo;
+    float turnVelocity;
 
     // Start is called before the first frame update
     void Start()
@@ -74,6 +77,9 @@ public class unitychanMove : MonoBehaviour
         equipObj = GameObject.Find("J_Mune_root_00");
 
         cameraMoveBase = GameObject.Find("cameraMather");
+        cameraMoveBaseTra = cameraMoveBase.transform;
+
+        turnVelocity = 0.5f;
     }
 
     // Update is called once per frame
@@ -94,40 +100,45 @@ public class unitychanMove : MonoBehaviour
         }
 
 
-        if (Input.GetKey(KeyCode.W))
-        {
-            moveFrontFlag = true;
-        }
-        else
-        {
-            moveFrontFlag = false;
-        }
+        //if (Input.GetKey(KeyCode.W))
+        //{
+        //    moveFrontFlag = true;
+        //}
+        //else
+        //{
+        //    moveFrontFlag = false;
+        //}
 
-        if (Input.GetKey(KeyCode.S))
-        {
-            moveBackFlag = true;
-        }
-        else
-        {
-            moveBackFlag = false;
-        }
+        //if (Input.GetKey(KeyCode.S))
+        //{
+        //    moveBackFlag = true;
+        //}
+        //else
+        //{
+        //    moveBackFlag = false;
+        //}
 
-        if (Input.GetKey(KeyCode.D))
-        {
-            moveRightFlag = true;
-        }
-        else
-        {
-            moveRightFlag = false;
-        }
+        //if (Input.GetKey(KeyCode.D))
+        //{
+        //    moveRightFlag = true;
+        //}
+        //else
+        //{
+        //    moveRightFlag = false;
+        //}
 
-        if (Input.GetKey(KeyCode.A))
+        //if (Input.GetKey(KeyCode.A))
+        //{
+        //    moveLeftFlag = true;
+        //}
+        //else
+        //{
+        //    moveLeftFlag = false;
+        //}
+
+        if(moveInfo != null)
         {
-            moveLeftFlag = true;
-        }
-        else
-        {
-            moveLeftFlag = false;
+            //transform. += moveInfo.x;
         }
 
         //マウスカーソルを消す
@@ -169,25 +180,25 @@ public class unitychanMove : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (moveFrontFlag)
-        {
-            myRb.position += move1;
-        }
+        //if (moveFrontFlag)
+        //{
+        //    myRb.position += move1;
+        //}
 
-        if (moveBackFlag)
-        {
-            myRb.position -= move1;
-        }
+        //if (moveBackFlag)
+        //{
+        //    myRb.position -= move1;
+        //}
 
-        if (moveRightFlag)
-        {
-            myRb.position += move2;
-        }
+        //if (moveRightFlag)
+        //{
+        //    myRb.position += move2;
+        //}
 
-        if (moveLeftFlag)
-        {
-            myRb.position -= move2;
-        }
+        //if (moveLeftFlag)
+        //{
+        //    myRb.position -= move2;
+        //}
 
         if (jumpFlag)
         {
@@ -223,10 +234,10 @@ public class unitychanMove : MonoBehaviour
     public void OnMove(InputAction.CallbackContext context)
     {
         // スティックの入力を受け取る
-        v = context.ReadValue<Vector2>();
+        moveInfo = context.ReadValue<Vector2>();
 
-        // 移動量を計算
-        var mov = new Vector3(v.x * speed * Time.deltaTime, 0, v.y * speed * Time.deltaTime);
+        //// 移動量を計算
+        //var mov = new Vector3(v.x * speed * Time.deltaTime, 0, v.y * speed * Time.deltaTime);
 
         //switch (context.phase)
         //{
@@ -245,15 +256,15 @@ public class unitychanMove : MonoBehaviour
         //        break;
         //}
 
-        //Performedフェーズ(倒し続けているとき)の処理
-        if (context.phase == InputActionPhase.Performed)
-        {
-            // 移動方向を向く
-            transform.forward = mov;
+        ////Performedフェーズ(倒し続けているとき)の処理
+        //if (context.phase == InputActionPhase.Performed)
+        //{
+        //    // 移動方向を向く
+        //    transform.forward = mov;
 
-            // 移動させる
-            transform.position = transform.position + mov;
-        }
+        //    // 移動させる
+        //    transform.position = transform.position + mov;
+        //}
 
 
     }
@@ -266,38 +277,40 @@ public class unitychanMove : MonoBehaviour
 
         // 移動量を計算
         var mov = new Vector3(v.x * speed * Time.deltaTime, 0, v.y * speed * Time.deltaTime);
-        //switch (context.phase)
-        //{
-        //    case InputActionPhase.Started:
-        //        // 入力開始
 
-        //        // 移動方向を向く
-        //        transform.forward = mov;
-        //        break;
-        //    case InputActionPhase.Canceled:
-        //        // 入力終了
-        //        break;
-        //    default:
-        //        // 移動方向を向く
-        //        transform.forward = mov;
-        //        break;
-        //}
 
-        // X方向に一定量移動していれば横回転
-        if (Mathf.Abs(v.x) > 0.001f)
+        if (context.phase == InputActionPhase.Waiting)
         {
-            // 回転軸はワールド座標のY軸
-            cameraMoveBase.transform.RotateAround(cameraMoveBase.transform.position, Vector3.up, v.x * 5f);
+            return;
+        }
+        if (context.phase == InputActionPhase.Started)
+        {
+            return;
         }
 
-        // Y方向に一定量移動していれば横回転
-        if (Mathf.Abs(v.y) > 0.001f)
+        if (context.phase == InputActionPhase.Performed)
         {
-            // 回転軸はワールド座標のY軸
-            cameraMoveBase.transform.RotateAround(cameraMoveBase.transform.position, -Vector3.right, v.y * 1f);
+            // X方向に一定量移動していれば横回転
+            if (Mathf.Abs(v.x) > 0.001f)
+            {
+                // 回転軸はワールド座標のY軸
+                cameraMoveBase.transform.RotateAround(cameraMoveBase.transform.position, Vector3.up, v.x * 5f);
+            }
+            // Y方向に一定量移動していれば横回転
+            if (Mathf.Abs(v.y) > 0.001f)
+            {
+                // 回転軸はワールド座標のY軸
+                cameraMoveBase.transform.RotateAround(cameraMoveBase.transform.position, -Vector3.right, v.y * 1f);
+                return;
+            }
+        }
+        if (context.phase == InputActionPhase.Canceled)
+        {
+            return;
         }
 
         // 移動させる
-        cameraMoveBaseTra.localEulerAngles = cameraMoveBaseTra.localEulerAngles + mov;
+        //cameraMoveBaseTra.localEulerAngles = cameraMoveBaseTra.localEulerAngles + mov;
+        cameraMoveBaseTra.localEulerAngles +=  mov;
     }
 }

@@ -2,97 +2,128 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class playerMove : MonoBehaviour
 {
-    Rigidbody myRb;
-    int rolltimer = 0;
-    float moveSpeed;
-    float rotate = 0;
-    bool moveFrontFlag = false;
-    bool moveBackFlag = false;
-    bool rollFlag = false;
-    Vector3 move;
-    Vector3 angle;
-
-    Vector3 x, y, z;
-    Vector3 rolling;
+    Transform thisTransform;
+    //カメラの親オブジェクト
+    GameObject cameraMoveBase;
+    //カメラの親オブジェクトのtransform
+    Transform cameraMoveBaseTra;
+    //ジャンプ
+    bool flag = false;
+    //移動速度
+    float speed = 10.0f;
+    //カメラの回転速度
+    float rotateSpeed = 0.5f;
+    //スティックの入力情報(移動)
+    Vector2 moveInfo;
+    //スティックの入力情報(カメラ)
+    Vector2 cameraInfo;
 
     // Start is called before the first frame update
     void Start()
     {
-        moveSpeed = 0.07f;
-        angle = new Vector3(0, 1.0f, 0);
-        myRb = this.GetComponent<Rigidbody>();
+        cameraMoveBase = GameObject.Find("cameraMather");
+        cameraMoveBaseTra = cameraMoveBase.transform;
 
-        rolling = new Vector3(0.1f, 0.0f, 0.0f);
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
-        move = transform.forward * moveSpeed;
+        if(moveInfo != Vector2.zero)
+        {
+            var mov = new Vector3(moveInfo.x * speed * Time.deltaTime, 0, moveInfo.y * speed * Time.deltaTime);
 
-        if (Input.GetKey(KeyCode.W))
-        {
-            moveFrontFlag = true;
-        }
-        else
-        {
-            moveFrontFlag = false;
-        }
+            // 移動方向を向く
+            transform.forward = mov;
 
-        if (Input.GetKey(KeyCode.S))
-        {
-            moveBackFlag = true;
-        }
-        else
-        {
-            moveBackFlag = false;
+            // 移動させる
+            transform.position = transform.position + mov;
         }
 
-        if (Input.GetKey(KeyCode.D))
+        if(cameraInfo != Vector2.zero)
         {
-            rotate += 0.8f;
+            var mov = new Vector3(cameraInfo.x * rotateSpeed * Time.deltaTime, 0, cameraInfo.y * rotateSpeed * Time.deltaTime);
 
-            this.transform.rotation = Quaternion.AngleAxis(rotate, angle);
-        }
-        if (Input.GetKey(KeyCode.A))
-        {
-            rotate -= 0.8f;
+            // X方向に一定量移動していれば横回転
+            if (Mathf.Abs(cameraInfo.x) > 0.001f)
+            {
+                // 回転軸はワールド座標のY軸
+                cameraMoveBase.transform.RotateAround(this.transform.position, Vector3.up, cameraInfo.x * 5f);
+            }
+            // Y方向に一定量移動していれば縦回転
+            if (Mathf.Abs(cameraInfo.y) > 0.001f)
+            {
+                // 回転軸はカメラ自身のX軸
+                cameraMoveBase.transform.RotateAround(cameraMoveBase.transform.position, -Vector3.right, cameraInfo.y * 1f);
+            }
 
-            this.transform.rotation = Quaternion.AngleAxis(rotate, angle);
-        }
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            rollFlag = true;
+            // 移動させる
+            cameraMoveBaseTra.localEulerAngles = cameraMoveBaseTra.localEulerAngles + mov;
         }
     }
 
-    void FixedUpdate()
+    private void OnCollisionEnter(Collision other)
     {
-        if(moveFrontFlag)
+        if (other.gameObject.tag == "ground")
         {
-            myRb.position += move;
+            flag = false;
         }
-        else if(moveBackFlag)
-        {
-            myRb.position -= move;
-        }
+    }
 
-        if (rollFlag == true)
-        {
-            if (rolltimer < 10)
-            {
-                this.transform.RotateAround(this.transform.position + move, rolling, 36.0f);
-                myRb.position += move * 30;
-                rolltimer++;
-            }
-            else
-            {
-                rolltimer = 0;
-                rollFlag = false;
-            }
-        }
+    //左スティックを倒したとき倒した向きと角度で移動
+    public void OnMove(InputAction.CallbackContext context)
+    {
+        // スティックの入力を受け取る
+        moveInfo = context.ReadValue<Vector2>();
+    }
+
+    //右スティックを倒したときのカメラの移動(今はx方向のみ)
+    public void OnCameraMove(InputAction.CallbackContext context)
+    {
+        //Debug.Log("cameraMove");
+        // スティックの入力を受け取る
+        cameraInfo = context.ReadValue<Vector2>();
+
+        //// 移動量を計算
+        //var mov = new Vector3(cameraInfo.x * speed * Time.deltaTime, 0, cameraInfo.y * speed * Time.deltaTime);
+
+
+        //if (context.phase == InputActionPhase.Waiting)
+        //{
+        //    return;
+        //}
+        //if (context.phase == InputActionPhase.Started)
+        //{
+        //    return;
+        //}
+
+        //if (context.phase == InputActionPhase.Performed)
+        //{
+        //    // X方向に一定量移動していれば横回転
+        //    if (Mathf.Abs(cameraInfo.x) > 0.001f)
+        //    {
+        //        // 回転軸はワールド座標のY軸
+        //        cameraMoveBase.transform.RotateAround(cameraMoveBase.transform.position, Vector3.up, cameraInfo.x * 5f);
+        //    }
+        //    // Y方向に一定量移動していれば横回転
+        //    if (Mathf.Abs(cameraInfo.y) > 0.001f)
+        //    {
+        //        // 回転軸はワールド座標のY軸
+        //        cameraMoveBase.transform.RotateAround(cameraMoveBase.transform.position, -Vector3.right, cameraInfo.y * 1f);
+        //        return;
+        //    }
+        //}
+        //if (context.phase == InputActionPhase.Canceled)
+        //{
+        //    return;
+        //}
+
+        //// 移動させる
+        ////cameraMoveBaseTra.localEulerAngles = cameraMoveBaseTra.localEulerAngles + mov;
+        //cameraMoveBaseTra.localEulerAngles += mov;
     }
 }

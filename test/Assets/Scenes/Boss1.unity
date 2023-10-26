@@ -290,7 +290,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   RootObject: {fileID: 1251518070}
-  Ename: Enemy
   count: 0
 --- !u!65 &285831441
 BoxCollider:
@@ -757,8 +756,8 @@ MonoBehaviour:
   m_ActionEvents:
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1740410970}
-        m_TargetAssemblyTypeName: unitychanMove, Assembly-CSharp
+      - m_Target: {fileID: 1740410975}
+        m_TargetAssemblyTypeName: playerMove, Assembly-CSharp
         m_MethodName: OnMove
         m_Mode: 0
         m_Arguments:
@@ -773,8 +772,8 @@ MonoBehaviour:
     m_ActionName: Player/Move[/XInputControllerWindows/leftStick,/Keyboard/w,/Keyboard/upArrow,/Keyboard/s,/Keyboard/downArrow,/Keyboard/a,/Keyboard/leftArrow,/Keyboard/d,/Keyboard/rightArrow]
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1740410970}
-        m_TargetAssemblyTypeName: unitychanMove, Assembly-CSharp
+      - m_Target: {fileID: 1740410975}
+        m_TargetAssemblyTypeName: playerMove, Assembly-CSharp
         m_MethodName: OnCameraMove
         m_Mode: 0
         m_Arguments:
@@ -1187,7 +1186,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1388309499}
-  - component: {fileID: 1388309498}
+  - component: {fileID: 1388309500}
   m_Layer: 0
   m_Name: cameraMather
   m_TagString: Untagged
@@ -1195,20 +1194,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1388309498
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1388309497}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6888a4c740da6ed48acffa045f582706, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  player: {fileID: 1740410966}
-  smoothTime: 0.3
 --- !u!4 &1388309499
 Transform:
   m_ObjectHideFlags: 0
@@ -1225,6 +1210,20 @@ Transform:
   m_Father: {fileID: 1906673181}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1388309500
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1388309497}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6888a4c740da6ed48acffa045f582706, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 1740410966}
+  smoothTime: 0.3
 --- !u!1 &1473320320
 GameObject:
   m_ObjectHideFlags: 0
@@ -1733,7 +1732,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1740410966}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4941ce38d8396194daf2948d110b77bf, type: 3}
   m_Name: 
@@ -1741,6 +1740,7 @@ MonoBehaviour:
   cameraPos: {fileID: 1866676354}
   flag: 0
   equipmentFlag: 0
+  cameraMoveBase: {fileID: 0}
   v: {x: 0, y: 0}
 --- !u!95 &1740410971
 Animator:
@@ -1805,6 +1805,18 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
+--- !u!114 &1740410975
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1740410966}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9bc2f7811aa0f7e4f9ddeb0b0eefbc9d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1741876062
 GameObject:
   m_ObjectHideFlags: 0
