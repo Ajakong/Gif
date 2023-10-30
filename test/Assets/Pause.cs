@@ -9,6 +9,7 @@ public class Pause : MonoBehaviour
     public GameObject menuIma;
 
     bool pause=false;
+    bool backFlag = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -19,15 +20,31 @@ public class Pause : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        pauseIma.SetActive(pause);
+        menuIma.SetActive(pause);
         //ê‡ñæÇÕïsóvÉiÉä
-        if(Input.GetKeyDown(KeyCode.P))
+        if (Input.GetKeyDown(KeyCode.P))
         {
-            pause = true;
+            if (backFlag == false)
+            {
+                pause = true;
+                backFlag = true;
 
-            pauseIma.SetActive(pause);
-            menuIma.SetActive(pause);
-            Time.timeScale = 0;
+                
+                Time.timeScale = 0;
+            }
+            else
+            {
+                pause = false;
+                backFlag = false;
+
+
+                Time.timeScale = 1;
+            }
+
+            
         }
+
         
     }
 }
