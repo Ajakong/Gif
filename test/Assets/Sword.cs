@@ -184,5 +184,12 @@ public class Sword : MonoBehaviour
             col.enabled = false;
 
         }
+
+  
+    }
+
+    public int At
+    {
+        get { return swordAt; }
     }
 }
