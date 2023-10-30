@@ -266,10 +266,10 @@
                 {
                     "name": "",
                     "id": "c1a9d39d-2b82-4e9a-a964-59c03d37c598",
-                    "path": "",
+                    "path": "<Gamepad>/buttonSouth",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": "Gamepad",
                     "action": "jump",
                     "isComposite": false,
                     "isPartOfComposite": false

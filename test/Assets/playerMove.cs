@@ -30,11 +30,22 @@ public class playerMove : MonoBehaviour
 
     }
 
+    void Update()
+    {
+
+    }
+
     // Update is called once per frame
     void FixedUpdate()
+
     {
-        if(moveInfo != Vector2.zero)
+        if (moveInfo != Vector2.zero)
         {
+            //Transform temp;
+
+            //cameraMoveBaseTra = cameraMoveBase.transform;
+            //temp = cameraMoveBaseTra;
+
             var mov = new Vector3(moveInfo.x * speed * Time.deltaTime, 0, moveInfo.y * speed * Time.deltaTime);
 
             // à⁄ìÆï˚å¸Çå¸Ç≠
@@ -55,11 +66,13 @@ public class playerMove : MonoBehaviour
                 cameraMoveBase.transform.RotateAround(this.transform.position, Vector3.up, cameraInfo.x * 5f);
             }
             // Yï˚å¸Ç…àÍíËó à⁄ìÆÇµÇƒÇ¢ÇÍÇŒècâÒì]
-            if (Mathf.Abs(cameraInfo.y) > 0.001f)
-            {
-                // âÒì]é≤ÇÕÉJÉÅÉâé©êgÇÃXé≤
-                cameraMoveBase.transform.RotateAround(cameraMoveBase.transform.position, -Vector3.right, cameraInfo.y * 1f);
-            }
+            //if (Mathf.Abs(cameraInfo.y) > 0.001f)
+            //{
+            //    // âÒì]é≤ÇÕÉJÉÅÉâé©êgÇÃXé≤
+            //    cameraMoveBase.transform.RotateAround(cameraMoveBase.transform.position, -Vector3.right, cameraInfo.y * 1f);
+            //}
+
+
 
             // à⁄ìÆÇ≥ÇπÇÈ
             cameraMoveBaseTra.localEulerAngles = cameraMoveBaseTra.localEulerAngles + mov;
@@ -125,5 +138,25 @@ public class playerMove : MonoBehaviour
         //// à⁄ìÆÇ≥ÇπÇÈ
         ////cameraMoveBaseTra.localEulerAngles = cameraMoveBaseTra.localEulerAngles + mov;
         //cameraMoveBaseTra.localEulerAngles += mov;
+    }
+
+    public void OnJump(InputAction.CallbackContext context)
+    {
+        if (context.phase == InputActionPhase.Performed)
+        {
+             //Debug.Log("jumping");
+             if(!flag)
+            {
+                flag = true;
+                Vector3 force = 6f * Vector3.up;
+                Rigidbody myRb = GetComponent<Rigidbody>();
+                myRb.AddForce(force, ForceMode.Impulse);
+            }
+   
+        }
+        else
+        {
+            return;
+        }
     }
 }

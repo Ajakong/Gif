@@ -791,7 +791,19 @@ MonoBehaviour:
     m_ActionId: 3ed14192-dbeb-4742-9a12-76c4e7d61683
     m_ActionName: Player/Fire[/XInputControllerWindows/rightTrigger,/Mouse/leftButton]
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1740410975}
+        m_TargetAssemblyTypeName: playerMove, Assembly-CSharp
+        m_MethodName: OnJump
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: 8a74afc9-f04b-4072-80bf-d3637f861e24
     m_ActionName: Player/jump
   - m_PersistentCalls:
@@ -932,7 +944,7 @@ GameObject:
   - component: {fileID: 1032420577}
   m_Layer: 0
   m_Name: Terrain_(-1000.00, 0.00, -1000.00)
-  m_TagString: Untagged
+  m_TagString: ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
@@ -1175,6 +1187,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: Mutant
       objectReference: {fileID: 0}
+    - target: {fileID: 6515712193588681746, guid: d40c5957048f3db4aac94a6d16ce3d4b, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6515712193588681746, guid: d40c5957048f3db4aac94a6d16ce3d4b, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 6.1545003e-20
+      objectReference: {fileID: 0}
+    - target: {fileID: 6515712193588681746, guid: d40c5957048f3db4aac94a6d16ce3d4b, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 4.6320552e-14
+      objectReference: {fileID: 0}
+    - target: {fileID: 6515712193588681746, guid: d40c5957048f3db4aac94a6d16ce3d4b, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 2.4704089e-13
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d40c5957048f3db4aac94a6d16ce3d4b, type: 3}
 --- !u!1 &1388309497
@@ -1317,7 +1345,7 @@ GameObject:
   - component: {fileID: 1497363432}
   m_Layer: 0
   m_Name: Terrain
-  m_TagString: Untagged
+  m_TagString: ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
@@ -1395,7 +1423,7 @@ GameObject:
   - component: {fileID: 1685053898}
   m_Layer: 0
   m_Name: Terrain_(-1000.00, 0.00, 0.00)
-  m_TagString: Untagged
+  m_TagString: ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
@@ -1725,23 +1753,6 @@ MonoBehaviour:
   parameterName: swordTrigger
   parameterValue: 1
   moveFlag: 0
---- !u!114 &1740410970
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1740410966}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4941ce38d8396194daf2948d110b77bf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  cameraPos: {fileID: 1866676354}
-  flag: 0
-  equipmentFlag: 0
-  cameraMoveBase: {fileID: 0}
-  v: {x: 0, y: 0}
 --- !u!95 &1740410971
 Animator:
   serializedVersion: 4
@@ -1830,7 +1841,7 @@ GameObject:
   - component: {fileID: 1741876063}
   m_Layer: 0
   m_Name: Terrain_(0.00, 0.00, -1000.00)
-  m_TagString: Untagged
+  m_TagString: ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
@@ -1920,14 +1931,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1866676353}
-  m_LocalRotation: {x: 0.2588191, y: 0, z: 0, w: 0.9659258}
-  m_LocalPosition: {x: 0, y: 8.01, z: -7.26}
+  m_LocalRotation: {x: 0.12342108, y: -0, z: -0, w: 0.9923544}
+  m_LocalPosition: {x: 0, y: 6.69, z: -8.02}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1388309499}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 30, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 14.179, y: 0, z: 0}
 --- !u!81 &1866676356
 AudioListener:
   m_ObjectHideFlags: 0
