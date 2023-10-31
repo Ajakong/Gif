@@ -5,10 +5,9 @@ public class CameraScript : MonoBehaviour
     [SerializeField] GameObject player;
 
     private Vector3 velocity = Vector3.zero;
-    Vector3 gole;
+    
     public float smoothTime = 0.3f;
-    float mx = 0;
-    float my = 0;
+    
     private void Start()
     {
 

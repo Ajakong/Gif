@@ -1,67 +1,35 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class playerMove : MonoBehaviour
+public class cameraRb : MonoBehaviour
 {
-    Transform thisTransform;
     //カメラの親オブジェクト
     GameObject cameraMoveBase;
     //カメラの親オブジェクトのtransform
     Transform cameraMoveBaseTra;
 
-    Rigidbody cameraRb;
-
-    //ジャンプ
-    bool flag = false;
-    //移動速度
-    float speed = 10.0f;
-    //カメラの回転速度
-    float rotateSpeed = 0.5f;
-    //スティックの入力情報(移動)
-    Vector2 moveInfo;
+    Rigidbody cameraRB;
     //スティックの入力情報(カメラ)
     Vector2 cameraInfo;
 
-
+    //カメラの回転速度
+    float rotateSpeed = 0.5f;
     // Start is called before the first frame update
     void Start()
     {
-        cameraMoveBase = GameObject.Find("cameraMather");
+        
 
         cameraMoveBaseTra = cameraMoveBase.transform;
 
-        cameraRb= cameraMoveBase.GetComponent<Rigidbody>();
-    }
-
-    void Update()
-    {
-
+        cameraRB = this.GetComponent<Rigidbody>();
     }
 
     // Update is called once per frame
-    void FixedUpdate()
-
+    void Update()
     {
-        if (moveInfo != Vector2.zero)
-        {
-            //Transform temp;
-
-            //cameraMoveBaseTra = cameraMoveBase.transform;
-            //temp = cameraMoveBaseTra;
-
-            var mov = new Vector3(moveInfo.x * speed * Time.deltaTime, 0, moveInfo.y * speed * Time.deltaTime);
-
-            // 移動方向を向く
-            transform.forward = cameraRb.transform.forward;
-
-            // 移動させる
-            transform.position = transform.position + mov;
-        }
-
-        if(cameraInfo != Vector2.zero)
+        if (cameraInfo != Vector2.zero)
         {
             var mov = new Vector3(cameraInfo.x * rotateSpeed * Time.deltaTime, 0, cameraInfo.y * rotateSpeed * Time.deltaTime);
 
@@ -69,7 +37,7 @@ public class playerMove : MonoBehaviour
             if (Mathf.Abs(cameraInfo.x) > 0.001f)
             {
                 // 回転軸はワールド座標のY軸
-                cameraMoveBase.transform.RotateAround(this.transform.position, Vector3.up, cameraInfo.x * 5f);
+                this.transform.RotateAround(this.transform.position, Vector3.up, cameraInfo.x * 5f);
             }
             // Y方向に一定量移動していれば縦回転
             //if (Mathf.Abs(cameraInfo.y) > 0.001f)
@@ -83,24 +51,9 @@ public class playerMove : MonoBehaviour
             // 移動させる
             cameraMoveBaseTra.localEulerAngles = cameraMoveBaseTra.localEulerAngles + mov;
         }
+
     }
 
-    private void OnCollisionEnter(Collision other)
-    {
-        if (other.gameObject.tag == "ground")
-        {
-            flag = false;
-        }
-    }
-
-    //左スティックを倒したとき倒した向きと角度で移動
-    public void OnMove(InputAction.CallbackContext context)
-    {
-        // スティックの入力を受け取る
-        moveInfo = context.ReadValue<Vector2>();
-    }
-
-    //右スティックを倒したときのカメラの移動(今はx方向のみ)
     public void OnCameraMove(InputAction.CallbackContext context)
     {
         //Debug.Log("cameraMove");
@@ -146,23 +99,4 @@ public class playerMove : MonoBehaviour
         //cameraMoveBaseTra.localEulerAngles += mov;
     }
 
-    public void OnJump(InputAction.CallbackContext context)
-    {
-        if (context.phase == InputActionPhase.Performed)
-        {
-             //Debug.Log("jumping");
-             if(!flag)
-            {
-                flag = true;
-                Vector3 force = 6f * Vector3.up;
-                Rigidbody myRb = GetComponent<Rigidbody>();
-                myRb.AddForce(force, ForceMode.Impulse);
-            }
-   
-        }
-        else
-        {
-            return;
-        }
-    }
 }
