@@ -55,7 +55,7 @@ public class playerMove : MonoBehaviour
             var mov = new Vector3(moveInfo.x * speed * Time.deltaTime, 0, moveInfo.y * speed * Time.deltaTime);
 
             // ˆÚ“®•ûŒü‚ðŒü‚­
-            transform.forward = cameraRb.transform.forward;
+            transform.forward = mov;
 
             // ˆÚ“®‚³‚¹‚é
             transform.position = transform.position + mov;

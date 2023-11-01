@@ -247,7 +247,7 @@ Transform:
   m_GameObject: {fileID: 2048271047269858779}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 2, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1, y: 1.4, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5844345368099990160}
@@ -315,7 +315,7 @@ CapsuleCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.5
-  m_Height: 2
+  m_Height: 2.1
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!54 &866037573511707187
@@ -348,6 +348,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHp: 20
   Hp: 100
+  attack: 5
   Item: {fileID: 2755425774180181053, guid: 8ed7d5952cf308144bddeb4254460a4c, type: 3}
 --- !u!114 &1430222589713742519
 MonoBehaviour:
