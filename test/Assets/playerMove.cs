@@ -33,7 +33,7 @@ public class playerMove : MonoBehaviour
 
         cameraMoveBaseTra = cameraMoveBase.transform;
 
-        cameraRb= cameraMoveBase.GetComponent<Rigidbody>();
+        cameraRb = cameraMoveBase.GetComponent<Rigidbody>();
     }
 
     void Update()
