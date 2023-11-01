@@ -7,27 +7,30 @@ public class HpBar : MonoBehaviour
 {
     Slider hpSlider;
 
-   
-
     EnemyState ene;
 
-    //int EneHp=100;
+    GameObject canvas;
+
+
     // Start is called before the first frame update
     void Start()
     {
-
-         
         hpSlider = this.GetComponent<Slider>();
         ene= GetComponentInParent<EnemyState>();
         hpSlider.maxValue = ene.maxHp;
         
         hpSlider.value = ene.maxHp;
+
+        canvas = GameObject.Find("Canvas");
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        //親オブジェクトの回転の影響を受けないように
+        transform.rotation = Quaternion.identity;
+
+
         hpSlider.value = ene.Hp;
     }
 }
