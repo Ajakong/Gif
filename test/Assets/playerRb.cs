@@ -36,18 +36,31 @@ public class playerRb : MonoBehaviour
         {
            
         }
+
+
+
+
         if (moveInfo != Vector2.zero)
         {
-            Debug.Log(moveInfo);
+            if (moveInfo.x <= 0)
+            {
+                moveInfo.x *= -1;
+            }
+
             myRb.position += cameraRb.transform.forward * 0.08f;
-            rotation.y=moveInfo.x;
+            rotation.y=Mathf.Atan(moveInfo.y/moveInfo.x)*90;
+
+            Debug.Log(rotation);
+
             transform.rotation = rotation;
+
+            moveInfo = Vector2.zero;
         }
-        if (Mathf.Abs(moveInfo.x) > 0.001f)
-        {
-            // 回転軸はワールド座標のY軸
-            this.transform.RotateAround(this.transform.position, Vector3.up, moveInfo.x * 5f);
-        }
+        //if (Mathf.Abs(moveInfo.x) > 0.001f)
+        //{
+        //    // 回転軸はワールド座標のY軸
+        //    this.transform.RotateAround(this.transform.position, Vector3.up, moveInfo.x * 5f);
+        //}
         
     }
 

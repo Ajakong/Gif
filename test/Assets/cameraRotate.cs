@@ -21,6 +21,7 @@ public class cameraRotate : MonoBehaviour
     public Vector3 forward
     {
         get { return cameForward; }
+
     }
     
     
