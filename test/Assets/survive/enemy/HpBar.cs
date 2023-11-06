@@ -28,8 +28,7 @@ public class HpBar : MonoBehaviour
     void Update()
     {
         //親オブジェクトの回転の影響を受けないように
-        transform.rotation = Quaternion.identity;
-
+        this.transform.LookAt(canvas.transform);
 
         hpSlider.value = ene.Hp;
     }
