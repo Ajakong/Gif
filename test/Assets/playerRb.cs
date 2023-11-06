@@ -42,18 +42,33 @@ public class playerRb : MonoBehaviour
 
         if (moveInfo != Vector2.zero)
         {
-            if (moveInfo.x <= 0)
+            
+            var mov = cameraRb.transform.forward * 0.08f;
+
+            if (Mathf.Abs(moveInfo.x) > 0.001f)
             {
-                moveInfo.x *= -1;
+                mov.x *= Mathf.Cos(moveInfo.x);
+                mov.z *= Mathf.Sin(moveInfo.x);
             }
 
-            myRb.position += cameraRb.transform.forward * 0.08f;
+            transform.rotation = new Quaternion(transform.rotation.x, mov.y, transform.rotation.z, Mathf.Atan(moveInfo.y / moveInfo.x));
+
+            mov.y = 0;
+
+            myRb.velocity = mov;
             rotation.y=Mathf.Atan(moveInfo.y/moveInfo.x)*90;
 
             Debug.Log(rotation);
 
-            transform.rotation = rotation;
+            
 
+            
+
+            
+
+            transform.forward += mov;
+
+            
             moveInfo = Vector2.zero;
         }
         //if (Mathf.Abs(moveInfo.x) > 0.001f)

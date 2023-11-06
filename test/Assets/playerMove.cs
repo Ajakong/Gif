@@ -8,7 +8,7 @@ public class playerMove : MonoBehaviour
 {
     Transform thisTransform;
     //カメラの親オブジェクト
-    GameObject cameraMoveBase;
+    public GameObject cameraMoveBase;
     //カメラの親オブジェクトのtransform
     Transform cameraMoveBaseTra;
 
@@ -29,7 +29,7 @@ public class playerMove : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        cameraMoveBase = GameObject.Find("cameraMather");
+        
 
         cameraMoveBaseTra = cameraMoveBase.transform;
 
@@ -54,11 +54,16 @@ public class playerMove : MonoBehaviour
 
             var mov = new Vector3(moveInfo.x * speed * Time.deltaTime, 0, moveInfo.y * speed * Time.deltaTime);
 
+            
             // 移動方向を向く
             transform.forward = mov;
 
+            
+
+
             // 移動させる
             transform.position = transform.position + mov;
+            
         }
 
         if(cameraInfo != Vector2.zero)
@@ -70,6 +75,8 @@ public class playerMove : MonoBehaviour
             {
                 // 回転軸はワールド座標のY軸
                 cameraMoveBase.transform.RotateAround(this.transform.position, Vector3.up, cameraInfo.x * 5f);
+
+
             }
             // Y方向に一定量移動していれば縦回転
             //if (Mathf.Abs(cameraInfo.y) > 0.001f)
