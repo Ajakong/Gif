@@ -24,7 +24,7 @@ public class EnemyState : MonoBehaviour
     {
         //transform.position = transform.position;
         //Ž€‚ñ‚¾
-        if (Hp <= 0)
+        if (Hp < 1)
         {
             Destroy(this.gameObject);
             //itemDrop‚·‚éƒiƒŠ
