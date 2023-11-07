@@ -42,7 +42,7 @@ public class playerRb : MonoBehaviour
 
         if (moveInfo != Vector2.zero)
         {
-            
+
             var mov = cameraRb.transform.forward * 0.08f;
 
             if (Mathf.Abs(moveInfo.x) > 0.001f)
@@ -56,19 +56,13 @@ public class playerRb : MonoBehaviour
             mov.y = 0;
 
             myRb.velocity = mov;
-            rotation.y=Mathf.Atan(moveInfo.y/moveInfo.x)*90;
+            rotation.y = Mathf.Atan(moveInfo.y / moveInfo.x) * 90;
 
             Debug.Log(rotation);
 
-            
-
-            
-
-            
-
             transform.forward += mov;
 
-            
+
             moveInfo = Vector2.zero;
         }
         //if (Mathf.Abs(moveInfo.x) > 0.001f)

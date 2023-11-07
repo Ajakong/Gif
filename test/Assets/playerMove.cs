@@ -14,6 +14,10 @@ public class playerMove : MonoBehaviour
 
     Rigidbody cameraRb;
 
+    rotest rotest;
+
+    Quaternion rotate;
+
     //ジャンプ
     bool flag = false;
     //移動速度
@@ -25,11 +29,13 @@ public class playerMove : MonoBehaviour
     //スティックの入力情報(カメラ)
     Vector2 cameraInfo;
 
+    Vector3 mov;
+
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        rotest=cameraMoveBase.GetComponent<rotest>();
 
         cameraMoveBaseTra = cameraMoveBase.transform;
 
@@ -38,7 +44,12 @@ public class playerMove : MonoBehaviour
 
     void Update()
     {
+        mov = transform.forward/10;
 
+        rotate = new Quaternion(transform.rotation.x, Mathf.Atan(moveInfo.x / moveInfo.y)*90, transform.rotation.z, Mathf.Atan(moveInfo.x / moveInfo.y));
+
+        // 移動方向を向く
+        transform.forward = rotest.rotateMove;
     }
 
     // Update is called once per frame
@@ -52,11 +63,10 @@ public class playerMove : MonoBehaviour
             //cameraMoveBaseTra = cameraMoveBase.transform;
             //temp = cameraMoveBaseTra;
 
-            var mov = new Vector3(moveInfo.x * speed * Time.deltaTime, 0, moveInfo.y * speed * Time.deltaTime);
+            //var mov = new Vector3(moveInfo.x * speed * Time.deltaTime, 0, moveInfo.y * speed * Time.deltaTime);
 
-            
-            // 移動方向を向く
-            transform.forward = mov;
+
+           
 
             
 
@@ -74,7 +84,7 @@ public class playerMove : MonoBehaviour
             if (Mathf.Abs(cameraInfo.x) > 0.001f)
             {
                 // 回転軸はワールド座標のY軸
-                cameraMoveBase.transform.RotateAround(this.transform.position, Vector3.up, cameraInfo.x * 5f);
+                //transform.RotateAround(this.transform.position, Vector3.up, cameraInfo.x * 5f);
 
 
             }
@@ -85,7 +95,7 @@ public class playerMove : MonoBehaviour
             //    cameraMoveBase.transform.RotateAround(cameraMoveBase.transform.position, -Vector3.right, cameraInfo.y * 1f);
             //}
 
-
+            transform.rotation = rotate;
 
             // 移動させる
             cameraMoveBaseTra.localEulerAngles = cameraMoveBaseTra.localEulerAngles + mov;
